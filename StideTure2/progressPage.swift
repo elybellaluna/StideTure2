@@ -9,7 +9,7 @@ import SwiftUI
 
 struct progressPage: View {
     var body: some View {
-        Text("Hello, World!6")
+        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
