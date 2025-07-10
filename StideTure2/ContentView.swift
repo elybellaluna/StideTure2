@@ -10,10 +10,14 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Button("Start Stride") {
-                
+            Button("Start Stride"){
+        
             }
-            
         }
-     }
+        .padding()
+    }
+}
+
+#Preview {
+    ContentView()
 }
