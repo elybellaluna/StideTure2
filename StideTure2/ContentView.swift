@@ -16,13 +16,14 @@ struct ContentView: View {
                     .font(.system(size: 30, weight: .bold, design: .default))
                     .foregroundColor(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
                     .position(x:120, y:10)
-                    .padding(.bottom, 20)
-                //fetch user name for welcome back text (currently static)
-                var userName: String = "John"
+                    .padding(0)
+//fetch user name for welcome back text (currently static)
+                var userName: String = "John7"
                 Text("\(userName)!")
                     .font(.system(size: 50, weight: .bold, design: .default))
                     .foregroundColor(Color(red: 0.5137254901960784, green: 0.40784313725490196, blue: 0.7254901960784313))
-                    .position(x:100, y:-300)
+                    .padding(.leading)
+                    .position(x:84, y:-350)
             }
 //start stride button
             Button("Start Stride") {
