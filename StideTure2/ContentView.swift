@@ -20,9 +20,9 @@ struct ContentView: View {
 //fetch user name for welcome back text (currently static)
             var userName: String = "John"
             Text("\(userName)!")
-                .font(.system(size: 35, weight: .bold, design: .default))
+                .font(.system(size: 50, weight: .bold, design: .default))
                 .foregroundColor(Color(red: 0.5137254901960784, green: 0.40784313725490196, blue: 0.7254901960784313))
-                .position(x:85, y:-300)
+                .position(x:100, y:-300)
 //start stride button
             Button("Start Stride") {
                 
