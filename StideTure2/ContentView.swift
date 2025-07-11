@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack{
-            VStack {
                 //Welcome back top screen
                 Text("Welcome Back")
                     .font(.system(size: 30, weight: .bold, design: .default))
@@ -18,13 +17,13 @@ struct ContentView: View {
                     .position(x:120, y:10)
                     .padding(0)
 //fetch user name for welcome back text (currently static)
-                var userName: String = "John7"
+                var userName: String = "John"
                 Text("\(userName)!")
                     .font(.system(size: 50, weight: .bold, design: .default))
                     .foregroundColor(Color(red: 0.5137254901960784, green: 0.40784313725490196, blue: 0.7254901960784313))
                     .padding(.leading)
-                    .position(x:84, y:-350)
-            }
+                    .position(x:80, y:40)
+            
 //start stride button
             Button("Start Stride") {
                 
@@ -34,17 +33,35 @@ struct ContentView: View {
             .background(Color(red: 0.5137254901960784, green: 0.40784313725490196, blue: 0.7254901960784313))
             .foregroundColor(.white)
             .cornerRadius(25.0)
-            
+            .position(x:200, y:350)
+                }
+            }
         }
-            
-       
-
-            
-            
-        }
+struct LabeledGauge: View {
+    @State private var current = 2.0
+    @State private var minValue = 0.0
+    @State private var maxValue = 3.0
+    let gradient = Gradient(colors: [.green, .yellow, .orange, .red])
+    
+    var body: some View {
+        ZStack{
+            Gauge(value: current, in: minValue...maxValue) {
+                Text("BPM")
+            } currentValueLabel: {
+                Text("\(Int(current))")
+            } minimumValueLabel: {
+                Text("\(Int(minValue))")
+            } maximumValueLabel: {
+                Text("\(Int(maxValue))")
+            }
+            .gaugeStyle(.accessoryCircular)
+            .position(x:200, y:-200)
         
+        }
     }
-
+}
+//A5A6F6,8368B9,287886
 #Preview {
     ContentView()
+    LabeledGauge()
 }
