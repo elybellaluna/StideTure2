@@ -10,6 +10,15 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
+//Welcome back top screen
+            Text("Welcome Back")
+                .font(.system(size: 30, weight: .bold, design: .default))
+                .foregroundColor(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
+                .frame(width: 300.0, height: 50.0)
+                .position(x:120, y:10)
+                .padding(.all)
+            
+//start stride button
             Button("Start Stride") {
                 
             }
@@ -20,7 +29,8 @@ struct ContentView: View {
             .cornerRadius(25.0)
         }
             
-            
+       
+
             
             
         }
