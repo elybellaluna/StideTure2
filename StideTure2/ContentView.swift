@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack{
+<<<<<<< HEAD
                 //Welcome back top screen
                 Text("Welcome Back")
                     .font(.system(size: 30, weight: .bold, design: .default))
