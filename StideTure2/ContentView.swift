@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack{
-<<<<<<< HEAD
                 //Welcome back top screen
                 Text("Welcome Back")
                     .font(.system(size: 30, weight: .bold, design: .default))
@@ -57,10 +56,24 @@ struct LabeledGauge: View {
             }
             .gaugeStyle(.accessoryCircular)
             .position(x:200, y:-200)
-        
+            
         }
     }
-}
+    var body1: some View {
+            TabView() {
+                ContentView()
+                    .tabItem{Image(systemName: "star"); Text("Home")
+                        foregroundStyle(Color.purple)}
+                progressPage()
+                    .tabItem {Image(systemName: "star"); Text("Progress")
+                    foregroundStyle(Color.purple)}
+                badgesPage()
+                    .tabItem{Image(systemName: "star"); Text("Badges")
+                    foregroundStyle(Color.purple)}
+            }
+        }
+    }
+
 //A5A6F6,8368B9,287886
 #Preview {
     ContentView()
