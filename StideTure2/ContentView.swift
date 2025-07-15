@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack{
-<<<<<<< HEAD
                 //Welcome back top screen
                 Text("Welcome Back")
                     .font(.system(size: 30, weight: .bold, design: .default))
@@ -29,8 +28,8 @@ struct ContentView: View {
             Button("Start Stride") {
                 
             }
-            .padding(.all)
-            .frame(width: 300.0)
+            .padding()
+            .frame(width: 298.0, height: 40)
             .background(Color(red: 0.5137254901960784, green: 0.40784313725490196, blue: 0.7254901960784313))
             .foregroundColor(.white)
             .cornerRadius(25.0)
@@ -48,6 +47,7 @@ struct LabeledGauge: View {
         ZStack{
             Gauge(value: current, in: minValue...maxValue) {
                 Text("BPM")
+                    .frame(width: 8.0)
             } currentValueLabel: {
                 Text("\(Int(current))")
             } minimumValueLabel: {
@@ -57,10 +57,19 @@ struct LabeledGauge: View {
             }
             .gaugeStyle(.accessoryCircular)
             .position(x:200, y:-200)
-        
-        }
-    }
-}
+            
+            Gauge(value: current, in: minValue...maxValue) {
+                    Text("BPM")
+            } currentValueLabel: {
+                    Text("\(Int(current))")
+            } minimumValueLabel: {
+                    Text("\(Int(minValue))")
+            } maximumValueLabel: {
+                    Text("\(Int(maxValue))")
+            }
+                }
+            }
+                }
 //A5A6F6,8368B9,287886
 #Preview {
     ContentView()
