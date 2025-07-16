@@ -10,7 +10,7 @@ struct ContentView: View {
     @State private var current = 2.0
     @State private var minValue = 0.0
     @State private var maxValue = 3.0
-    @State private var selectedOption = "Option 1"
+    @State private var selectedOption : String? = nil
     var body: some View {
         ZStack{
                 //Welcome back top screen
@@ -65,7 +65,6 @@ struct ContentView: View {
                 .position(x:200, y:400)
                 
             
-    Text("Environment: \(selectedOption)")
             Menu{
                 Button("Park"){
                     selectedOption = "Park"
@@ -77,15 +76,25 @@ struct ContentView: View {
                     selectedOption = "Forest"
                 }
             } label: {
-                    Label("Select Environment", systemImage:"chevron.down.circle")
-                        .background(Color.blue)
-                        .cornerRadius(5)
-                        .position(x:200, y:250)
+                HStack{
+                    Spacer()
+                    Text(selectedOption ?? "Select Environment")
+                        .foregroundColor(Color.white)
+                    Spacer()
+                    
+                    Image(systemName: "chevron.down.circle")
+                    
+                }
+            }
+                    .padding(4)
+                    .background(Color(red: 0.6470588235294118, green: 0.6509803921568628, blue: 0.9647058823529412))
+                        .cornerRadius(20)
                         .foregroundColor(.white)
+                        .frame(width: 298.0, height: 40.0)
+                        .position(x:200, y:250)
                 }
             }
         }
-    }
 
 //A5A6F6,8368B9,287886
 #Preview {
