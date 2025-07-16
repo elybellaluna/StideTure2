@@ -1,0 +1,17 @@
+{
+  "meta" : {
+    "version" : "2024-11-15"
+  },
+  "resources" : {
+    "achievements" : [
+      {
+        "archived" : false,
+        "points" : 3,
+        "referenceName" : "badges",
+        "repeatable" : false,
+        "showBeforeEarned" : true,
+        "vendorIdentifier" : "100"
+      }
+    ]
+  }
+}
