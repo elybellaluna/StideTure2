@@ -18,8 +18,9 @@ struct badgesPage: View {
                     .position(x: 100, y: 40)
             }
         }
-            
-        }
+        
+            }
+        
     }
     
     #Preview {
