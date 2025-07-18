@@ -82,7 +82,7 @@ struct AchievementsAndLeaderboardView: View {
                                         Image(achievement.unlocked ? achievement.imageName : "achievement_locked")
                                             .resizable()
                                             .scaledToFit()
-                                            .frame(width: 120, height: 120)
+                                            .frame(width: 130, height: 130)
                                             .grayscale(achievement.unlocked ? 0 : 1)
                                             .opacity(achievement.unlocked ? 1 : 0.5)
                                     }
