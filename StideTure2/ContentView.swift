@@ -24,18 +24,20 @@ struct ContentView: View {
                     let secs = seconds % 60
                     return String(format: "%02d:%02d:%02d", hours, minutes, secs)
                 }
+//set up for camera navigation
+        @State private var showCapturePage = false
 
     let images = ["image1", "image2", "image3"]
     
     var body: some View {
         ZStack{
-//Welcome back top screen
+            //Welcome back top screen
             Text("Welcome Back")
                 .font(.system(size: 30, weight: .bold, design: .default))
                 .foregroundColor(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
                 .position(x:120, y:10)
                 .padding(0)
-//fetch user name for welcome back text (currently static)
+            //fetch user name for welcome back text (currently static)
             var userName: String = "John"
             Text("\(userName)!")
                 .font(.system(size: 50, weight: .bold, design: .default))
@@ -49,7 +51,7 @@ struct ContentView: View {
                     .foregroundColor(.gray)
                     .position(x: 200, y: 420)
             }
-//start stride button
+            //start stride button
             Button(isTimerOn ? "Stop Stride" : "Start Stride") {
                 if isTimerOn {
                     timer?.invalidate()
@@ -73,12 +75,12 @@ struct ContentView: View {
             
             
             
-//Calling Gauge Style
+            //Calling Gauge Style
             CustomCircularGauge(value: current, range: minValue...maxValue)
                 .position(x: 200, y: 200)
             
             
-//dropdown for environment selection
+            //dropdown for environment selection
             Menu{
                 Button("Park"){
                     selectedOption = "Park"
@@ -106,7 +108,7 @@ struct ContentView: View {
             .foregroundColor(.white)
             .frame(width: 298.0, height: 40.0)
             .position(x:200, y:330)
-        }
+            
             TabView {
                 ForEach(images, id: \.self) { img in
                     Image(img)
@@ -117,8 +119,25 @@ struct ContentView: View {
             .frame(width: 200, height: 200)
             .cornerRadius(20)
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-            .position(x:200, y:200)
-                }
+            .position(x:150, y:550)
+            //camera button
+            Button(action: { showCapturePage = true})
+            {
+                Image(systemName: "camera")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 45, height: 45)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+            }
+            .position(x: 325, y: 550)
+            .fullScreenCover(isPresented: $showCapturePage) {
+                CapturePage()
+            }
+        }
+    }
             }
 
 //A5A6F6,8368B9,287886
