@@ -20,7 +20,7 @@ struct tabBar: View {
                    Image(systemName: "person.crop.circle")
                    Text("Progress")
                }
-          AchievementsView()
+          AchievementsGridView()
                .tabItem {
                    Image(systemName: "bell")
                    Text("Badges")
