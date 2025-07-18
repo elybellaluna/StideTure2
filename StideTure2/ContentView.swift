@@ -11,6 +11,8 @@ struct ContentView: View {
     @State private var minValue = 0.0
     @State private var maxValue = 3.0
     @State private var selectedOption : String? = nil
+
+    let images = ["image1", "image2", "image3"]
     
     var body: some View {
         ZStack{
@@ -74,6 +76,17 @@ CustomCircularGauge(value: current, range: minValue...maxValue)
                         .foregroundColor(.white)
                         .frame(width: 298.0, height: 40.0)
                         .position(x:200, y:330)
+            TabView {
+                ForEach(images, id: \.self) { img in
+                    Image(img)
+                        .resizable()
+                        .scaledToFill()
+                }
+            }
+            .frame(width: 200, height: 200)
+            .cornerRadius(20)
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
+            .position(x:200, y:550)
                 }
             }
         }
