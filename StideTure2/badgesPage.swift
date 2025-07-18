@@ -5,16 +5,13 @@
 //  Created by 52GOParticipant on 7/9/25.
 //
 
-import SwiftUI
 struct badgesPage: App {
-    var body: some Scene {
-        WindowGroup{
-            NavigationView {
-                AchievementsGridView()
+        var body: some Scene {
+            WindowGroup {
+                AchievementsAndLeaderboardView()
             }
         }
     }
-}
 import SwiftUI
 
 // MARK: - Achievement Model
@@ -27,16 +24,34 @@ struct Achievement: Identifiable {
     let imageName: String
     var unlocked: Bool
 }
-  
 
-// MARK: - Main Grid View
-struct AchievementsGridView: View {
+// MARK: - Leaderboard Entry Model
+struct LeaderboardEntry: Identifiable {
+    let id = UUID()
+    let name: String
+    let score: Int
+}
+
+// MARK: - Tabs Enum
+enum TabType: String, CaseIterable {
+    case achievements = "Achievements"
+    case leaderboard = "Leaderboard"
+}
+
+// MARK: - Main View
+struct AchievementsAndLeaderboardView: View {
+    @State private var selectedTab: TabType = .achievements
     @State private var scannedCount: Int = UserDefaults.standard.integer(forKey: "scannedCount")
     @State private var achievements: [Achievement] = []
     @State private var selectedAchievement: Achievement?
-    @State private var showDetail = false
 
-    // 3-column grid
+    let leaderboardEntries: [LeaderboardEntry] = [
+        .init(name: "Alice", score: 120),
+        .init(name: "Bob", score: 90),
+        .init(name: "You", score: 66),
+        .init(name: "Carol", score: 54)
+    ]
+
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -44,66 +59,94 @@ struct AchievementsGridView: View {
     ]
 
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns, spacing: 20) {
-                ForEach(achievements) { achievement in
-                    VStack(spacing: 8) {
-                        Button(action: {
-                            selectedAchievement = achievement
-                            showDetail = true
-                        }) {
-                            VStack {
-                                Image(achievement.unlocked ? achievement.imageName : "achievement_locked")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 120, height: 120)
-                                    .grayscale(achievement.unlocked ? 0 : 1)
-                                    .opacity(achievement.unlocked ? 1 : 0.5)
+        NavigationView {
+            VStack {
+                Picker("Select View", selection: $selectedTab) {
+                    ForEach(TabType.allCases, id: \.self) { tab in
+                        Text(tab.rawValue).tag(tab)
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding()
 
-                                Text(achievement.title)
-                                    .font(.caption)
-                                    .multilineTextAlignment(.center)
-                                    .foregroundColor(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
+                Divider()
+
+                if selectedTab == .achievements {
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            ForEach(achievements) { achievement in
+                                VStack(spacing: 8) {
+                                    Button(action: {
+                                        selectedAchievement = achievement
+                                    }) {
+                                        Image(achievement.unlocked ? achievement.imageName : "achievement_locked")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 120, height: 120)
+                                            .grayscale(achievement.unlocked ? 0 : 1)
+                                            .opacity(achievement.unlocked ? 1 : 0.5)
+                                    }
+
+                                    Text(achievement.title)
+                                        .font(.caption)
+                                        .multilineTextAlignment(.center)
+                                        .foregroundColor(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
+                                }
                             }
+                        }
+                        .padding()
+                    }
+                } else {
+                    List {
+                        ForEach(leaderboardEntries.sorted(by: { $0.score > $1.score })) { entry in
+                            HStack {
+                                Text(entry.name)
+                                    .font(.headline)
+                                Spacer()
+                                Text("\(entry.score)")
+                                    .bold()
+                            }
+                            .padding(.vertical, 4)
                         }
                     }
                 }
+
+                Spacer()
             }
-            .padding()
+            .navigationTitle("Badges")
+            .foregroundStyle(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
+            .onAppear {
+                scannedCount = UserDefaults.standard.integer(forKey: "scannedCount")
+                achievements = generateAchievements(scannedCount: scannedCount)
+            }
+            .sheet(item: $selectedAchievement) { achievement in
+                AchievementDetailView(achievement: achievement)
+            }
         }
-        .onAppear {
-            achievements = generateAchievements(scannedCount: scannedCount)
-        }
-        .sheet(item: $selectedAchievement) { achievement in
-            AchievementDetailView(achievement: achievement)
-        }
-        .navigationTitle("Achievements")
     }
 
-    // Generate dynamic list
+    // MARK: - Generate Achievements
     func generateAchievements(scannedCount: Int, count: Int = 50) -> [Achievement] {
-        var achievements = [Achievement]()
+        var list = [Achievement]()
         for i in 1...count {
             let threshold = i * 6
             let unlocked = scannedCount >= threshold
-            let imageName = "achievement_\(i)" // make sure these are in Assets
-
-            achievements.append(
+            list.append(
                 Achievement(
                     index: i,
                     title: "Scanned \(threshold) items!",
-                    description: "Unlocked by scanning \(threshold) items.",
+                    description: "Unlocked by scanning \(threshold) objects.",
                     threshold: threshold,
-                    imageName: imageName,
+                    imageName: "achievement_\(i)", // <-- Ensure you have these in Assets
                     unlocked: unlocked
                 )
             )
         }
-        return achievements
+        return list
     }
 }
 
-// MARK: - Detail View on Tap
+// MARK: - Detail Sheet View
 struct AchievementDetailView: View {
     let achievement: Achievement
 
@@ -138,10 +181,11 @@ struct AchievementDetailView: View {
 
 
 
+
         
         
     #Preview {
-        AchievementsGridView()
+        AchievementsAndLeaderboardView()
     }
         
         
