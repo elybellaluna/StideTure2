@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9B6E0BD62E2ABAC400935F57 /* Property List.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B6E0BD52E2ABAC400935F57 /* Property List.plist */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		9B6E0B7B2E1ECA4A00935F57 /* StideTure2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StideTure2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B6E0BD52E2ABAC400935F57 /* Property List.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Property List.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +37,7 @@
 		9B6E0B722E1ECA4A00935F57 = {
 			isa = PBXGroup;
 			children = (
+				9B6E0BD52E2ABAC400935F57 /* Property List.plist */,
 				9B6E0B7D2E1ECA4A00935F57 /* StideTure2 */,
 				9B6E0B7C2E1ECA4A00935F57 /* Products */,
 			);
@@ -109,6 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B6E0BD62E2ABAC400935F57 /* Property List.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
