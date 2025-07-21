@@ -29,6 +29,9 @@ struct ContentView: View {
 
     let images = ["image1", "image2", "image3"]
     
+//userName sign on
+    @AppStorage("userFirstName") var userFirstName: String = "User"
+    
     var body: some View {
         ZStack{
             //Welcome back top screen
@@ -37,9 +40,8 @@ struct ContentView: View {
                 .foregroundColor(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
                 .position(x:120, y:10)
                 .padding(0)
-            //fetch user name for welcome back text (currently static)
-            var userName: String = "John"
-            Text("\(userName)!")
+            //fetch user name for welcome back text (pulling from apple sign on or in app sign on)
+            Text("\(userFirstName)!")
                 .font(.system(size: 50, weight: .bold, design: .default))
                 .foregroundColor(Color(red: 0.5137254901960784, green: 0.40784313725490196, blue: 0.7254901960784313))
                 .padding(.top, 0)
