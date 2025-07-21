@@ -11,7 +11,7 @@ struct CustomCircularGauge: View {
     var value: Double
     var range: ClosedRange<Double>
     var lineWidth: CGFloat = 20
-    var size: CGFloat = 150
+    var size: CGFloat = 200
     var progress: Double {
         (value - range.lowerBound) / (range.upperBound - range.lowerBound)}
     

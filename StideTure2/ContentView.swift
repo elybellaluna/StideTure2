@@ -43,7 +43,7 @@ struct ContentView: View {
                 .font(.system(size: 50, weight: .bold, design: .default))
                 .foregroundColor(Color(red: 0.5137254901960784, green: 0.40784313725490196, blue: 0.7254901960784313))
                 .padding(.top, 0)
-                .position(x:70, y:45)
+                .position(x:85, y:45)
             
             if showTimer {
                 Text("Stride Time: \(formatTime(seconds: timeElapsed))")
@@ -57,7 +57,6 @@ struct ContentView: View {
                     timer?.invalidate()
                     timer = nil
                     isTimerOn = false
-                    showTimer = false
                 } else {
                     timeElapsed = 0
                     isTimerOn = true
