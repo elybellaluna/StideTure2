@@ -10,8 +10,41 @@ import AuthenticationServices
 
 struct signInPage: View {
  @AppStorage("userFirstName") var userFirstName: String = ""
-    
+    @State private var email: String = ""
+    @State private var password: String = ""
+    @State private var lastName: String = ""
     var body: some View {
+        VStack{
+            Text("Sign In")
+                .bold()
+                .font(.largeTitle)
+            
+            TextField("First Name", text: $userFirstName)
+                .textContentType(.name)
+                .background(Color(.secondarySystemBackground))
+                .frame(width: 300, height: 50)
+                .cornerRadius(10)
+            
+            TextField("Last Name", text: $lastName)
+                .textContentType(.name)
+                .background(Color(.secondarySystemBackground))
+                .frame(width: 300, height: 50)
+                .cornerRadius(10)
+            
+            TextField("Email", text: $email)
+                .textContentType(.emailAddress)
+                .background(Color(.secondarySystemBackground))
+                .frame(width: 300, height: 50)
+                .cornerRadius(10)
+            
+            SecureField("Password", text: $password)
+                .textContentType(.password)
+                .background(Color(.secondarySystemBackground))
+                .frame(width: 300, height: 50)
+                .cornerRadius(10)
+            
+        }
+        
         SignInWithAppleButton(
             .signIn,
             onRequest: { request in
