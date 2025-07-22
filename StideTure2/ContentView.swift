@@ -31,6 +31,7 @@ struct ContentView: View {
     
 //userName sign on
     @AppStorage("userFirstName") var userFirstName: String = "User"
+    @AppStorage("isSignedIn") var isSignedIn = false
     
     var body: some View {
         ZStack{
@@ -137,6 +138,10 @@ struct ContentView: View {
             .fullScreenCover(isPresented: $showCapturePage) {
                 CapturePage()
             }
+            Button("Sign Out") {
+                isSignedIn = false
+            }
+            .position(x: 325, y: 20)
         }
     }
             }
