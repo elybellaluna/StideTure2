@@ -32,7 +32,7 @@ struct CameraPreview: UIViewRepresentable {
 }
     struct CapturePage: View {
         @State private var session = AVCaptureSession()
-        
+        @Environment(\.dismiss) var dismiss
         var body: some View {
             ZStack {
                 CameraPreview(session: session)
@@ -40,7 +40,7 @@ struct CameraPreview: UIViewRepresentable {
                 VStack {
                     HStack {
                         Spacer()
-                        Button(action:{})
+                        Button(action:{dismiss()})
                         {
                             Image(systemName: "xmark.circle.fill")
                                 .foregroundColor(.white)

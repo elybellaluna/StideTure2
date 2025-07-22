@@ -11,23 +11,25 @@ struct ContentView: View {
     @State private var minValue = 0.0
     @State private var maxValue = 3.0
     @State private var selectedOption : String? = nil
-    //vars for timer
+//vars for timer
     @State private var timeElapsed = 0
     @State private var timer: Timer? = nil
     @State private var isTimerOn = false
     @State private var showTimer = false
-    
-    //timer formatting
-                func formatTime(seconds: Int) -> String {
-                    let hours = seconds / 3600
-                    let minutes = (seconds % 3600) / 60
-                    let secs = seconds % 60
-                    return String(format: "%02d:%02d:%02d", hours, minutes, secs)
-                }
+//timer formatting
+    func formatTime(seconds: Int) -> String {
+        let hours = seconds / 3600
+        let minutes = (seconds % 3600) / 60
+        let secs = seconds % 60
+        return String(format: "%02d:%02d:%02d", hours, minutes, secs)
+    }
 //set up for camera navigation
-        @State private var showCapturePage = false
-
-    let images = ["image1", "image2", "image3"]
+    @State private var showCapturePage = false
+    @State private var selectedImageSet: [String] = []
+    
+    let parkImageSet = ["antImage", "oakTreeImage", "beeImage", "daisyImage"]
+    let forestImageSet = ["Tree Vines", "Mushrooom", "Large Rocks", "Green Algea"]
+    let cityImageSet = ["Building","Traffic Light", "Yellow Car", "Stop Sign"]
     
 //userName sign on
     @AppStorage("userFirstName") var userFirstName: String = "User"
@@ -82,16 +84,19 @@ struct ContentView: View {
                 .position(x: 200, y: 200)
             
             
-            //dropdown for environment selection
+//dropdown for environment selection
             Menu{
                 Button("Park"){
                     selectedOption = "Park"
+                    selectedImageSet = parkImageSet
                 }
                 Button("City"){
                     selectedOption = "City"
+                    selectedImageSet = cityImageSet
                 }
                 Button("Forest"){
                     selectedOption = "Forest"
+                    selectedImageSet = forestImageSet
                 }
             } label: {
                 HStack{
@@ -112,7 +117,7 @@ struct ContentView: View {
             .position(x:200, y:330)
             
             TabView {
-                ForEach(images, id: \.self) { img in
+                ForEach(selectedImageSet, id: \.self) { img in
                     Image(img)
                         .resizable()
                         .scaledToFill()
