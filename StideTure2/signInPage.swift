@@ -27,6 +27,7 @@ struct signInPage: View {
                 Text("Sign In")
                     .bold()
                     .font(.largeTitle)
+                    .foregroundColor(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
                 
                 TextField("First Name", text: $firstName)
                     .textContentType(.name)
@@ -53,10 +54,14 @@ struct signInPage: View {
                     .cornerRadius(10)
                 
                 Button("Log In"){
+                    userFirstName = firstName
                     isSignedIn = true
                 }
-                
-                
+                .frame(width: 300, height: 50)
+                .background(Color(red: 165/255, green: 166/255, blue: 246/255))
+                .cornerRadius(10)
+                .foregroundColor(.white)
+            
             }
             
             SignInWithAppleButton(
@@ -89,3 +94,4 @@ struct signInPage: View {
 #Preview {
     signInPage()
 }
+//light purple: A5A6F6 red: 165/255, green: 166/255, blue: 246/255, dark purple: 8368B9 red: 131/255, green: 104/255, blue: 185/255, teal:287886
