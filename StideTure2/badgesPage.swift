@@ -44,14 +44,15 @@ struct AchievementsAndLeaderboardView: View {
     @State private var scannedCount: Int = UserDefaults.standard.integer(forKey: "scannedCount")
     @State private var achievements: [Achievement] = []
     @State private var selectedAchievement: Achievement?
+    @AppStorage("userFirstName") var userFirstName: String = "User"
     
-    let leaderboardEntries: [LeaderboardEntry] = [
+    var leaderboardEntries: [LeaderboardEntry]  { [
         .init(name: "Alice", score: 120),
         .init(name: "Bob", score: 90),
-        .init(name: "You", score: 66),
+        .init(name: userFirstName, score: 66),
         .init(name: "Carol", score: 54)
-    ]
-    
+        ]
+    }
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),

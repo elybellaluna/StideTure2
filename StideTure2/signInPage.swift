@@ -20,7 +20,7 @@ struct signInPage: View {
     var body: some View {
         
         if isSignedIn{
-            ContentView()
+            tabBar()
         } else {
             
             VStack{
