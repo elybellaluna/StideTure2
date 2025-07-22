@@ -44,23 +44,29 @@ struct AchievementsAndLeaderboardView: View {
     @State private var scannedCount: Int = UserDefaults.standard.integer(forKey: "scannedCount")
     @State private var achievements: [Achievement] = []
     @State private var selectedAchievement: Achievement?
-
+    
     let leaderboardEntries: [LeaderboardEntry] = [
         .init(name: "Alice", score: 120),
         .init(name: "Bob", score: 90),
         .init(name: "You", score: 66),
         .init(name: "Carol", score: 54)
     ]
-
+    
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
-
+    
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Badges")
+                    .font(.system(size: 40, weight: .bold))
+                    .foregroundColor(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
+                    .padding(.top, 20)
+                    .padding(.leading, 20)
+                
                 Picker("Select View", selection: $selectedTab) {
                     ForEach(TabType.allCases, id: \.self) { tab in
                         Text(tab.rawValue).tag(tab)
@@ -68,9 +74,9 @@ struct AchievementsAndLeaderboardView: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
-
+                
                 Divider()
-
+                
                 if selectedTab == .achievements {
                     ScrollView {
                         LazyVGrid(columns: columns, spacing: 20) {
@@ -86,7 +92,7 @@ struct AchievementsAndLeaderboardView: View {
                                             .grayscale(achievement.unlocked ? 0 : 1)
                                             .opacity(achievement.unlocked ? 1 : 0.5)
                                     }
-
+                                    
                                     Text(achievement.title)
                                         .font(.caption)
                                         .multilineTextAlignment(.center)
@@ -102,19 +108,22 @@ struct AchievementsAndLeaderboardView: View {
                             HStack {
                                 Text(entry.name)
                                     .font(.headline)
+                                    .foregroundColor(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
+                                
                                 Spacer()
+                                
                                 Text("\(entry.score)")
                                     .bold()
+                                    .foregroundColor(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
+                                
                             }
                             .padding(.vertical, 4)
                         }
                     }
                 }
-
                 Spacer()
+                
             }
-            .navigationTitle("Badges")
-            .foregroundStyle(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
             .onAppear {
                 scannedCount = UserDefaults.standard.integer(forKey: "scannedCount")
                 achievements = generateAchievements(scannedCount: scannedCount)
@@ -124,7 +133,9 @@ struct AchievementsAndLeaderboardView: View {
             }
         }
     }
-
+    
+    
+    
     // MARK: - Generate Achievements
     func generateAchievements(scannedCount: Int, count: Int = 50) -> [Achievement] {
         var list = [Achievement]()
@@ -137,56 +148,53 @@ struct AchievementsAndLeaderboardView: View {
                     title: "Scanned \(threshold) items!",
                     description: "Unlocked by scanning \(threshold) objects.",
                     threshold: threshold,
-                    imageName: "achievement_\(i)", // <-- Ensure you have these in Assets
+                    imageName: "achievement_\(i)",
                     unlocked: unlocked
                 )
             )
         }
         return list
     }
+    
+   
 }
 
-// MARK: - Detail Sheet View
-struct AchievementDetailView: View {
-    let achievement: Achievement
-
-    var body: some View {
-        VStack(spacing: 20) {
-            Image(achievement.unlocked ? achievement.imageName : "achievement_locked")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 300, height: 300)
-                .grayscale(achievement.unlocked ? 0 : 1)
-                .opacity(achievement.unlocked ? 1 : 0.5)
-
-            Text(achievement.title)
-                .font(.title2)
-                .bold()
-                .foregroundColor(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
-
-            Text(achievement.description)
-                .font(.body)
-                .foregroundColor(.gray)
-                .padding()
-
-            Spacer()
+    
+    // MARK: - Detail Sheet View
+    struct AchievementDetailView: View {
+        let achievement: Achievement
+        
+        var body: some View {
+            VStack(spacing: 20) {
+                Image(achievement.unlocked ? achievement.imageName : "achievement_locked")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 300, height: 300)
+                    .grayscale(achievement.unlocked ? 0 : 1)
+                    .opacity(achievement.unlocked ? 1 : 0.5)
+                
+                Text(achievement.title)
+                    .font(.title2)
+                    .bold()
+                    .foregroundColor(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
+                
+                Text(achievement.description)
+                    .font(.body)
+                    .foregroundColor(.gray)
+                    .padding()
+                
+                Spacer()
+            }
+            .padding()
         }
-        .padding()
     }
-}
-
-
-
-
-
-
-
-
-        
-        
+    
+    
+    
+    
+    
     #Preview {
         AchievementsAndLeaderboardView()
     }
-        
         
     
