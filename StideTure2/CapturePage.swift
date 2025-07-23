@@ -31,8 +31,9 @@ struct CameraPreview: UIViewRepresentable {
     }
     func updateUIView(_ uiView: VideoPreviewView, context: Context) {}
 }
+
 struct CapturePage: View {
-    //let selectedEnvironment: EnvironmentType
+    @AppStorage("selectedOption") private var selectedOption: String?
     @State private var session = AVCaptureSession()
     @State private var photoOutput = AVCapturePhotoOutput()
     @State private var classificationResult: String = ""
@@ -103,9 +104,26 @@ struct CapturePage: View {
         self.processor = newProcessor
         photoOutput.capturePhoto(with: settings, delegate: newProcessor)
     }
-    func classifyImage(_ image: UIImage) {
+    
+func classifyImage(_ image: UIImage) {
         do {
-            let mlModel = try Forest(configuration: MLModelConfiguration()).model
+            let mlModel: MLModel
+            guard let option = selectedOption?.lowercased() else {
+                classificationResult = "No environment selected"
+                return
+            }
+
+            switch option {
+            case "forest":
+                mlModel = try Forest(configuration: MLModelConfiguration()).model
+            case "park":
+                mlModel = try Park(configuration: MLModelConfiguration()).model
+            case "city":
+                mlModel = try StreetOrCity(configuration: MLModelConfiguration()).model
+            default:
+                classificationResult = "Unknown environment: \(option)"
+                return
+            }
             let model = try VNCoreMLModel(for: mlModel)
             
             guard let ciImage = CIImage(image: image) else {

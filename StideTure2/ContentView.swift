@@ -10,7 +10,7 @@ struct ContentView: View {
     @State private var current = 2.0
     @State private var minValue = 0.0
     @State private var maxValue = 3.0
-    @State private var selectedOption : String? = nil
+@AppStorage("selectedOption") private var selectedOption: String?
 //vars for timer
     @State private var timeElapsed = 0
     @State private var timer: Timer? = nil
@@ -28,7 +28,7 @@ struct ContentView: View {
     @State private var selectedImageSet: [String] = []
     
     let parkImageSet = ["antImage", "oakTreeImage", "beeImage", "daisyImage"]
-    let forestImageSet = ["Tree Vines", "Mushrooom", "Large Rocks", "Green Algea"]
+    let forestImageSet = ["Tree Vines", "Mushroom", "Large Rocks", "Green Algea"]
     let cityImageSet = ["Building","Traffic Light", "Yellow Car", "Stop Sign"]
 //refresh and randomize images
     @State private var randomizedImageSet: [String] = []
