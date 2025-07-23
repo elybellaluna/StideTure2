@@ -32,11 +32,12 @@ struct ProgressViewPage: View {
         TabView {
             VStack {
                 Text("Weekly Steps").font(.title).bold().padding(.top)
+                    .foregroundStyle(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
                 Chart {
                     ForEach(stats) { stat in
                         BarMark(x: .value("Day", stat.day),
                                 y: .value("Steps", stat.steps))
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(Color(red: 0.5137254901960784, green: 0.40784313725490196, blue: 0.7254901960784313))
                     }
                 }
                 .frame(height: 250)
@@ -46,11 +47,12 @@ struct ProgressViewPage: View {
 
             VStack {
                 Text("Active Time").font(.title).bold().padding(.top)
+                    .foregroundStyle(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
                 Chart {
                     ForEach(stats) { stat in
                         BarMark(x: .value("Day", stat.day),
                                 y: .value("Minutes", stat.time))
-                            .foregroundStyle(.green)
+                            .foregroundStyle(Color(red: 0.5137254901960784, green: 0.40784313725490196, blue: 0.7254901960784313))
                     }
                 }
                 .frame(height: 250)
