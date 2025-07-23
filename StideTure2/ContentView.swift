@@ -30,12 +30,27 @@ struct ContentView: View {
     let parkImageSet = ["antImage", "oakTreeImage", "beeImage", "daisyImage"]
     let forestImageSet = ["Tree Vines", "Mushrooom", "Large Rocks", "Green Algea"]
     let cityImageSet = ["Building","Traffic Light", "Yellow Car", "Stop Sign"]
-    
+//refresh and randomize images
+    @State private var randomizedImageSet: [String] = []
+    @State private var currentTabIndex: Int = 0
+    func updateRandomImages() {
+        randomizedImageSet = Array(selectedImageSet.shuffled().prefix(3))
+        currentTabIndex = 0
+    }
+    func refreshCurrentImage() {
+        let currentImage = randomizedImageSet[currentTabIndex]
+        let availableImages = selectedImageSet.filter { !randomizedImageSet.contains($0)}
+        guard !availableImages.isEmpty else { return }
+        let newImage = availableImages.randomElement()!
+        randomizedImageSet[currentTabIndex] = newImage
+        }
+
 //userName sign on
     @AppStorage("userFirstName") var userFirstName: String = "User"
     @AppStorage("isSignedIn") var isSignedIn = false
     
     var body: some View {
+    
         ZStack{
             //Welcome back top screen
             Text("Welcome Back")
@@ -85,19 +100,24 @@ struct ContentView: View {
             
             
 //dropdown for environment selection
+
             Menu{
                 Button("Park"){
                     selectedOption = "Park"
                     selectedImageSet = parkImageSet
+                    updateRandomImages()
                 }
                 Button("City"){
                     selectedOption = "City"
                     selectedImageSet = cityImageSet
+                    updateRandomImages()
                 }
                 Button("Forest"){
                     selectedOption = "Forest"
                     selectedImageSet = forestImageSet
+                    updateRandomImages()
                 }
+                
             } label: {
                 HStack{
                     Spacer()
@@ -116,18 +136,29 @@ struct ContentView: View {
             .frame(width: 298.0, height: 40.0)
             .position(x:200, y:330)
             
-            TabView {
-                ForEach(selectedImageSet, id: \.self) { img in
+//slideshow placeholder before environment selection
+            if selectedImageSet.isEmpty {
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color(red: 165/255, green: 166/255, blue: 246/255, opacity: 1.0))
+                    .frame(width: 200, height: 200)
+                    .position(x:150, y:550)
+            }
+            
+            
+//Image slideshow
+            TabView(selection: $currentTabIndex) {
+                ForEach(Array(randomizedImageSet.enumerated()), id: \.element) {index, img in
                     Image(img)
                         .resizable()
                         .scaledToFill()
+                        .tag(index)
                 }
             }
             .frame(width: 200, height: 200)
             .cornerRadius(20)
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
             .position(x:150, y:550)
-            //camera button
+//camera button
             Button(action: { showCapturePage = true})
             {
                 Image(systemName: "camera")
@@ -147,7 +178,16 @@ struct ContentView: View {
                 isSignedIn = false
             }
             .position(x: 325, y: 20)
+            
+            Button(action:{ refreshCurrentImage()}) {
+                Image(systemName: "arrow.clockwise.circle")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .foregroundColor(.purple)
+            }
+                    .position(x: 270, y: 460)
         }
+        
     }
             }
 
