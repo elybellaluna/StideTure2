@@ -16,3 +16,4 @@ struct progressPage: View {
 #Preview {
     progressPage()
 }
+//steps, distance, time

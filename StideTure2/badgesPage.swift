@@ -147,7 +147,7 @@ struct AchievementsAndLeaderboardView: View {
                 Achievement(
                     index: i,
                     title: "Scanned \(threshold) items!",
-                    description: "Unlocked by scanning \(threshold) objects.",
+                    description: "Unlocked by scanning \(threshold) items.",
                     threshold: threshold,
                     imageName: "achievement_\(i)",
                     unlocked: unlocked
