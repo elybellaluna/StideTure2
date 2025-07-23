@@ -52,7 +52,7 @@ struct ProgressViewPage: View {
                     ForEach(stats) { stat in
                         BarMark(x: .value("Day", stat.day),
                                 y: .value("Minutes", stat.time))
-                            .foregroundStyle(Color(red: 0.5137254901960784, green: 0.40784313725490196, blue: 0.7254901960784313))
+                        .foregroundStyle(Color(red: 0.5137254901960784, green: 0.40784313725490196, blue: 0.7254901960784313))
                     }
                 }
                 .frame(height: 250)
@@ -61,7 +61,12 @@ struct ProgressViewPage: View {
             .tag(1)
 
             VStack {
-                Text("Distance Map").font(.title).bold().padding(.top)
+                Text("Distance Map")
+                    .font(.title)
+                    .bold()
+                    .padding(.top)
+                    .foregroundStyle(Color(red: 0.1568627450980392, green: 0.47058823529411764, blue: 0.5254901960784314))
+               LineOnMapView()
             }
             .tag(2)
         }
