@@ -90,11 +90,11 @@ struct ContentView: View {
             .foregroundColor(.white)
             .cornerRadius(25.0)
             .position(x:200, y:370)
-            /// display timer
+           
             
             
             
-            //Calling Gauge Style
+//Calling Gauge Style
             CustomCircularGauge(value: current, range: minValue...maxValue)
                 .position(x: 200, y: 200)
             
