@@ -158,6 +158,13 @@ struct ContentView: View {
             .cornerRadius(20)
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
             .position(x:150, y:550)
+//will display name of image oonly if it is not empty
+            if !randomizedImageSet.isEmpty {
+                Text(randomizedImageSet[currentTabIndex])
+                    .fontWeight(.heavy)
+                    .foregroundColor(.gray)
+                    .position(x: 150, y: 660)
+            }
 //camera button
             Button(action: { showCapturePage = true})
             {
