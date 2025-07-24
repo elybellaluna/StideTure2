@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct StideTure2App: App {
+    @StateObject private var score = SessionStore()
     var body: some Scene {
         WindowGroup {
             signInPage()
+                .environmentObject(score)
         }
     }
 }

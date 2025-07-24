@@ -9,14 +9,14 @@ import SwiftUI
 struct ContentView: View {
     
 //gauge and score tracking
-    @State private var current = 2.0
+    @State private var current = 0.0
     @State private var minValue = 0.0
     @State private var maxValue = 3.0
 @AppStorage("selectedOption") var selectedOption: String?
 @AppStorage("currentTargetImage") var currentTargetImage: String = ""
 @AppStorage("allTimeScore") var AllTimeScore: Int = 0
-    @State private var score: Int = 0
-
+@EnvironmentObject var score: SessionStore
+    
 //vars for timer
     @State private var timeElapsed = 0
     @State private var timer: Timer? = nil
@@ -104,6 +104,7 @@ struct ContentView: View {
             
             
 //Calling Gauge Style
+            let current = Double(score.score)
             CustomCircularGauge(value: current, range: minValue...maxValue)
                 .position(x: 200, y: 200)
             

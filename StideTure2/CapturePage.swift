@@ -35,7 +35,9 @@ struct CameraPreview: UIViewRepresentable {
 struct CapturePage: View {
     @AppStorage("selectedOption") private var selectedOption: String?
     @AppStorage("currentTargetImage") var currentTargetImage: String = ""
-    @AppStorage("score") var score: Int = 0
+    @EnvironmentObject var score: SessionStore
+    //@AppStorage("score") var score: Int = 0
+    @AppStorage("allTimeScore") var allTimeScore: Int = 0
     @State private var session = AVCaptureSession()
     @State private var photoOutput = AVCapturePhotoOutput()
     @State private var classificationResult: String = ""
@@ -144,8 +146,8 @@ func classifyImage(_ image: UIImage) {
                     DispatchQueue.main.async {
                         classificationResult = "Prediction: \(top.identifier) (\(String(format: "%.2f", top.confidence * 100))%)"
                         if prediction == target {
-                            score += 1
-                            allTimeScore +=1
+                            score.score += 1
+                            allTimeScore += 1
                             classificationResult += "\n✅ Match! +1 Point"
                         } else {
                             classificationResult += "\n❌ No Match"
@@ -185,4 +187,5 @@ class PhotoCaptureProcessor: NSObject, AVCapturePhotoCaptureDelegate {
 }
 #Preview {
     CapturePage()
+        .environmentObject(SessionStore())
 }
