@@ -7,15 +7,22 @@
 
 import SwiftUI
 struct ContentView: View {
+    
+//gauge and score tracking
     @State private var current = 2.0
     @State private var minValue = 0.0
     @State private var maxValue = 3.0
-@AppStorage("selectedOption") private var selectedOption: String?
+@AppStorage("selectedOption") var selectedOption: String?
+@AppStorage("currentTargetImage") var currentTargetImage: String = ""
+@AppStorage("allTimeScore") var AllTimeScore: Int = 0
+    @State private var score: Int = 0
+
 //vars for timer
     @State private var timeElapsed = 0
     @State private var timer: Timer? = nil
     @State private var isTimerOn = false
     @State private var showTimer = false
+    
 //timer formatting
     func formatTime(seconds: Int) -> String {
         let hours = seconds / 3600
@@ -23,13 +30,15 @@ struct ContentView: View {
         let secs = seconds % 60
         return String(format: "%02d:%02d:%02d", hours, minutes, secs)
     }
+    
 //set up for camera navigation
     @State private var showCapturePage = false
     @State private var selectedImageSet: [String] = []
     
-    let parkImageSet = ["antImage", "oakTreeImage", "beeImage", "daisyImage"]
-    let forestImageSet = ["Tree Vines", "Mushroom", "Large Rocks", "Green Algea"]
-    let cityImageSet = ["Building","Traffic Light", "Yellow Car", "Stop Sign"]
+    let parkImageSet = ["An Ant", "An oak Tree", "A Bee", "A Daisy"]
+    let forestImageSet = ["Tree Vine", "A Mushroom", "A Rock", "Green Algae"]
+    let cityImageSet = ["A Building","Street Traffic Light", "A Yellow Car", "A Stop Sign"]
+    
 //refresh and randomize images
     @State private var randomizedImageSet: [String] = []
     @State private var currentTabIndex: Int = 0
@@ -46,8 +55,8 @@ struct ContentView: View {
         }
 
 //userName sign on
-    @AppStorage("userFirstName") var userFirstName: String = "User"
-    @AppStorage("isSignedIn") var isSignedIn = false
+@AppStorage("userFirstName") var userFirstName: String = "User"
+@AppStorage("isSignedIn") var isSignedIn = false
     
     var body: some View {
     
@@ -144,7 +153,6 @@ struct ContentView: View {
                     .position(x:150, y:550)
             }
             
-            
 //Image slideshow
             TabView(selection: $currentTabIndex) {
                 ForEach(Array(randomizedImageSet.enumerated()), id: \.element) {index, img in
@@ -158,15 +166,17 @@ struct ContentView: View {
             .cornerRadius(20)
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
             .position(x:150, y:550)
-//will display name of image oonly if it is not empty
+//will display name of image only if it is not empty
             if !randomizedImageSet.isEmpty {
-                Text(randomizedImageSet[currentTabIndex])
+                Text("Capture:\(randomizedImageSet[currentTabIndex])")
                     .fontWeight(.heavy)
                     .foregroundColor(.gray)
                     .position(x: 150, y: 660)
             }
 //camera button
-            Button(action: { showCapturePage = true})
+            Button(action: {
+                currentTargetImage = randomizedImageSet[currentTabIndex]
+                showCapturePage = true})
             {
                 Image(systemName: "camera")
                     .resizable()
