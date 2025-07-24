@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Strideture uses this to help track your daily walking achievements.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>Strideture needs access to your steps and activity time to track your walking progress.</string>
+</dict>
+</plist>

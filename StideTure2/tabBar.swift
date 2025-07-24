@@ -15,7 +15,7 @@ struct tabBar: View {
                    Image(systemName: "house")
                    Text("Home")
                }
-           ProgressViewPage()
+           ProgressPage()
                .tabItem {
                    Image(systemName: "person.crop.circle")
                    Text("Progress")

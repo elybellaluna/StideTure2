@@ -8,23 +8,46 @@
 import SwiftUI
 import MapKit
 
-struct LineOnMapView: View {
-    /// The provided walking route
-    let walkingRoute: [CLLocationCoordinate2D] = [
-        CLLocationCoordinate2D(latitude: 40.836456,longitude: 14.307014),
-        CLLocationCoordinate2D(latitude: 40.835654,longitude: 14.304346),
-        CLLocationCoordinate2D(latitude: 40.836478,longitude: 14.302593),
-        CLLocationCoordinate2D(latitude: 40.836936,longitude: 14.302464)
-    ]
-    
+struct DistanceMapView: View {
+    var route: [CLLocationCoordinate2D]
+
+    @State private var region: MKCoordinateRegion
+
+    init(route: [CLLocationCoordinate2D]) {
+        self.route = route
+        let center = route.first ?? CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        _region = State(initialValue: MKCoordinateRegion(
+            center: center,
+            span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
+        ))
+    }
+
     var body: some View {
-        Map {
-            /// The Map Polyline map content object
-            MapPolyline(coordinates: walkingRoute)
+        Map{
+            MapPolyline(coordinates: route)
                 .stroke(.blue, lineWidth: 5)
+                .mapOverlayLevel(level: .aboveLabels)
+
+            if let start = route.first {
+                Marker("Start", coordinate: start)
+                    .tint(.green)
+            }
+            if let end = route.last {
+                Marker("End", coordinate: end)
+                    .tint(.red)
+            }
         }
+        .mapControls {
+            MapCompass()
+            MapScaleView()
+        }
+        .ignoresSafeArea()
     }
 }
 #Preview {
-    LineOnMapView()
+    DistanceMapView(route: [
+        CLLocationCoordinate2D(latitude: 37.3318, longitude: -121.8863),
+        CLLocationCoordinate2D(latitude: 37.3323, longitude: -121.8858),
+    ])
 }
+
