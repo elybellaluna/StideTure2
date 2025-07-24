@@ -10,9 +10,22 @@
 		9B6E0B7B2E1ECA4A00935F57 /* StideTure2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StideTure2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		DBA1447D2E32B358007DB087 /* Exceptions for "StideTure2" folder in "StideTure2" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 9B6E0B7A2E1ECA4A00935F57 /* StideTure2 */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		9B6E0B7D2E1ECA4A00935F57 /* StideTure2 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				DBA1447D2E32B358007DB087 /* Exceptions for "StideTure2" folder in "StideTure2" target */,
+			);
 			path = StideTure2;
 			sourceTree = "<group>";
 		};
@@ -249,11 +262,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StideTure2/StideTure2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T8T2H2LPV5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StideTure2/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Access to your camera is needed to capture your strides";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow us to acces your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -279,11 +294,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = StideTure2/StideTure2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T8T2H2LPV5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = StideTure2/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Access to your camera is needed to capture your strides";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow us to acces your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
