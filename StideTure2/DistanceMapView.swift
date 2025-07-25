@@ -46,8 +46,8 @@ struct DistanceMapView: View {
 }
 #Preview {
     DistanceMapView(route: [
-        CLLocationCoordinate2D(latitude: 37.3318, longitude: -121.8863),
-        CLLocationCoordinate2D(latitude: 37.3323, longitude: -121.8858),
+        CLLocationCoordinate2D(latitude: 41.838282, longitude:  -87.628591),
+        CLLocationCoordinate2D(latitude: 41.838432, longitude: -87.621531),
     ])
 }
 
