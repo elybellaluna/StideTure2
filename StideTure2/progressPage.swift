@@ -15,9 +15,8 @@ struct ProgressPage: View {
 
     // Sample route
     let sampleRoute = [
-        CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
-        CLLocationCoordinate2D(latitude: 37.7756, longitude: -122.4188),
-        CLLocationCoordinate2D(latitude: 37.7763, longitude: -122.4180)
+        CLLocationCoordinate2D(latitude: 41.838282, longitude: -87.628591),
+        CLLocationCoordinate2D(latitude: 41.838432, longitude: -87.621531)
     ]
 
     var body: some View {
