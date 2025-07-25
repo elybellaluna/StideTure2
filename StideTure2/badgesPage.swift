@@ -14,7 +14,7 @@ struct badgesPage: App {
     }
 import SwiftUI
 
-// MARK: - Achievement Model
+//Achievement Model
 struct Achievement: Identifiable {
     let id = UUID()
     let index: Int
@@ -25,20 +25,20 @@ struct Achievement: Identifiable {
     var unlocked: Bool
 }
 
-// MARK: - Leaderboard Entry Model
+// Leaderboard
 struct LeaderboardEntry: Identifiable {
     let id = UUID()
     let name: String
     let score: Int
 }
 
-// MARK: - Tabs Enum
+// Tabs
 enum TabType: String, CaseIterable {
     case achievements = "Achievements"
     case leaderboard = "Leaderboard"
 }
 
-// MARK: - Main View
+// Main View
 struct AchievementsAndLeaderboardView: View {
     @State private var selectedTab: TabType = .achievements
     @State private var scannedCount: Int = UserDefaults.standard.integer(forKey: "scannedCount")
@@ -137,7 +137,7 @@ struct AchievementsAndLeaderboardView: View {
     
     
     
-    // MARK: - Generate Achievements
+    //Generate Achievements
     func generateAchievements(scannedCount: Int, count: Int = 50) -> [Achievement] {
         var list = [Achievement]()
         for i in 1...count {
@@ -161,7 +161,7 @@ struct AchievementsAndLeaderboardView: View {
 }
 
     
-    // MARK: - Detail Sheet View
+    //Detail View
     struct AchievementDetailView: View {
         let achievement: Achievement
         

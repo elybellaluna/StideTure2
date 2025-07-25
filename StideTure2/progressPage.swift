@@ -13,7 +13,7 @@ struct ProgressPage: View {
     @StateObject var viewModel = ProgressViewModel()
     @State private var selectedTab = 0
 
-    // Sample route for demo
+    // Sample route
     let sampleRoute = [
         CLLocationCoordinate2D(latitude: 37.7749, longitude: -122.4194),
         CLLocationCoordinate2D(latitude: 37.7756, longitude: -122.4188),
