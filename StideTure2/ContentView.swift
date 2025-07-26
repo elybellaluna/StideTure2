@@ -212,4 +212,5 @@ struct ContentView: View {
 //A5A6F6,8368B9,287886
 #Preview {
     ContentView()
+        .environmentObject(SessionStore())
 }

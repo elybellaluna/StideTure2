@@ -17,7 +17,7 @@ struct CustomCircularGauge: View {
     
     var body: some View {
 //design gauge style
-        //A5A6F6,8368B9,287886
+//System hex colors A5A6F6,8368B9,287886
                             
                   Circle()
                         .stroke(Color.gray.opacity(0.2), lineWidth: lineWidth)
